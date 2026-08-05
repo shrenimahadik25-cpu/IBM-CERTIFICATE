@@ -1,0 +1,927 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindCare — Mental Health &amp; Suicide Prevention</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f8fa;
+      --border: #e5e7eb;
+      --text: #1f2328;
+      --muted: #57606a;
+      --accent: #3b82d4;
+      --secondary: #7c5cd8;
+      --green: #2d8a4e;
+      --red: #c0392b;
+      --yellow: #b45309;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--secondary);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .nav-links { display: flex; gap: 20px; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-crisis {
+      background: var(--red);
+      color: #fff !important;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+    }
+    .nav-crisis:hover { background: #a93226 !important; color: #fff !important; }
+
+    /* ── SECTIONS ── */
+    section { padding: 56px 24px; }
+    .container { max-width: 760px; margin: 0 auto; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #f0f4ff 0%, #fdf4ff 100%);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      padding: 72px 24px 64px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #ede9fe;
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 span { color: var(--secondary); }
+    .hero p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 28px;
+    }
+    .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 11px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn-primary { background: var(--secondary); color: #fff; }
+    .btn-outline { background: #fff; color: var(--text); border: 1.5px solid var(--border); }
+    .btn-danger { background: var(--red); color: #fff; font-size: 15px; padding: 13px 28px; }
+
+    /* ── CRISIS BANNER ── */
+    .crisis-banner {
+      background: #fff5f5;
+      border: 1.5px solid #fca5a5;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 0;
+    }
+    .crisis-banner h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+    .crisis-banner p { color: var(--text); font-size: 14.5px; margin-bottom: 14px; }
+    .crisis-numbers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .crisis-chip {
+      background: #fff;
+      border: 1.5px solid #fca5a5;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--red);
+    }
+    .crisis-chip span { font-weight: 400; color: var(--muted); margin-left: 4px; }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 14.5px;
+      margin-bottom: 28px;
+      max-width: 560px;
+    }
+
+    /* ── SIGN CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+    .card-icon.purple { background: #ede9fe; }
+    .card-icon.blue { background: #dbeafe; }
+    .card-icon.green { background: #d1fae5; }
+    .card-icon.yellow { background: #fef3c7; }
+    .card-icon.red { background: #fee2e2; }
+    .card-icon.pink { background: #fce7f3; }
+    .card h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ── WARNING SIGNS ── */
+    .warning-section { background: #fffbeb; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .warning-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+    }
+    .warning-list li {
+      background: #fff;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #f59e0b;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      color: var(--text);
+    }
+
+    /* ── COPING TOOLS ── */
+    .coping-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .coping-card {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 10px;
+      padding: 18px;
+    }
+    .coping-card h3 {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #0369a1;
+      margin-bottom: 8px;
+    }
+    .coping-card ul { list-style: none; }
+    .coping-card ul li {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 3px 0;
+      padding-left: 14px;
+      position: relative;
+    }
+    .coping-card ul li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── BREATHING EXERCISE ── */
+    .breathing-box {
+      background: #f5f3ff;
+      border: 1px solid #ddd6fe;
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+    }
+    .breathing-box h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+    .breathing-box p { color: var(--muted); font-size: 13.5px; margin-bottom: 24px; }
+    .breath-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: #ede9fe;
+      border: 3px solid var(--secondary);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--secondary);
+      transition: transform 0.5s ease;
+    }
+    .breath-circle.expand { transform: scale(1.35); background: #ddd6fe; }
+    .breath-circle.hold { transform: scale(1.35); background: #c4b5fd; }
+    .breath-circle.shrink { transform: scale(1); background: #ede9fe; }
+    #breath-phase { font-size: 15px; color: var(--secondary); font-weight: 600; margin-bottom: 6px; }
+    #breath-count { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .breath-controls { display: flex; gap: 10px; justify-content: center; }
+    #startBreath {
+      background: var(--secondary);
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    #startBreath:hover { opacity: 0.88; }
+    #stopBreath {
+      background: #fff;
+      color: var(--muted);
+      border: 1.5px solid var(--border);
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ── MOOD CHECKER ── */
+    .mood-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .mood-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .mood-box h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .mood-box p { color: var(--muted); font-size: 13.5px; margin-bottom: 20px; }
+    .mood-options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .mood-btn {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 72px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .mood-btn span { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .mood-btn.selected { border-color: var(--accent); background: #eff6ff; }
+    #mood-response {
+      display: none;
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 14px;
+      color: #166534;
+    }
+    #mood-response.sad { background: #fff1f2; border-color: #fda4af; color: #9f1239; }
+    #mood-response.neutral { background: #fefce8; border-color: #fde047; color: #713f12; }
+
+    /* ── RESOURCES TABLE ── */
+    .resources-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    .resources-table th {
+      background: var(--surface);
+      border-bottom: 1.5px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .resources-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .resources-table tr:last-child td { border-bottom: none; }
+    .tag {
+      display: inline-block;
+      background: #ede9fe;
+      color: var(--secondary);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .tag.blue { background: #dbeafe; color: #1d4ed8; }
+    .tag.green { background: #d1fae5; color: #065f46; }
+
+    /* ── SELF-CARE CHECKLIST ── */
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-size: 13.5px;
+      color: var(--text);
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .check-item input[type="checkbox"] {
+      accent-color: var(--green);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    .check-item.done {
+      background: #f0fdf4;
+      border-color: #86efac;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+    #checklist-msg {
+      margin-top: 14px;
+      font-size: 13.5px;
+      color: var(--green);
+      font-weight: 600;
+      display: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer-inner { max-width: 760px; margin: 0 auto; }
+    .footer-links { display: flex; gap: 18px; justify-content: center; margin-bottom: 14px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    .footer-links a:hover { color: var(--accent); }
+    .made-with {
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: #adb5bd;
+    }
+
+    /* ── TABS ── */
+    .tabs { display: flex; gap: 0; border-bottom: 1.5px solid var(--border); margin-bottom: 24px; }
+    .tab-btn {
+      padding: 10px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2.5px solid transparent;
+      margin-bottom: -1.5px;
+      cursor: pointer;
+    }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 520px) {
+      .hero h1 { font-size: 24px; }
+      .nav-links { display: none; }
+      .section-title { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+
+
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">🌿 MindCare</a>
+    <ul class="nav-links">
+      <li><a href="#understand">Understand</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#crisis" class="nav-crisis">Crisis Help</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="hero" id="home">
+  <div class="hero-badge">You Are Not Alone</div>
+  <h1>Mental Health Matters.<br /><span>Hope Is Always Here.</span></h1>
+  <p>A safe space for support, education, and tools to help you or someone you care about through difficult times.</p>
+  <div class="hero-buttons">
+    <a href="#tools" class="btn btn-primary">Try Coping Tools</a>
+    <a href="#crisis" class="btn btn-outline">Crisis Resources</a>
+  </div>
+</div>
+
+
+<section id="crisis" style="background:#fff5f5;border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="crisis-banner">
+      <h2>🆘 In Crisis? Get Help Now</h2>
+      <p>If you or someone you know is in immediate danger or having thoughts of suicide, please reach out immediately. You deserve support.</p>
+      <div class="crisis-numbers">
+        <div class="crisis-chip">988 <span>Suicide &amp; Crisis Lifeline (US)</span></div>
+        <div class="crisis-chip">Crisis Text Line <span>Text HOME to 741741</span></div>
+        <div class="crisis-chip">iCall <span>9152987821 (India)</span></div>
+        <div class="crisis-chip">Samaritans <span>116 123 (UK)</span></div>
+        <div class="crisis-chip">Vandrevala <span>1860-2662-345 (India)</span></div>
+        <div class="crisis-chip">Emergency <span>Call 911 / 112</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="understand">
+  <div class="container">
+    <div class="section-label">Understanding</div>
+    <div class="section-title">What is Mental Health?</div>
+    <p class="section-sub">Mental health includes emotional, psychological, and social well-being. It affects how we think, feel, and act — at every stage of life.</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="tab-types">Common Conditions</button>
+      <button class="tab-btn" data-tab="tab-myths">Myths vs Facts</button>
+      <button class="tab-btn" data-tab="tab-stats">Key Statistics</button>
+    </div>
+
+    
+    <div class="tab-panel active" id="tab-types">
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon purple">😞</div>
+          <h3>Depression</h3>
+          <p>Persistent sadness, loss of interest, low energy, and feelings of hopelessness that last weeks or longer.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon blue">😰</div>
+          <h3>Anxiety Disorders</h3>
+          <p>Excessive worry or fear that interferes with daily activities; includes panic disorder, social anxiety, and PTSD.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon yellow">🌊</div>
+          <h3>Bipolar Disorder</h3>
+          <p>Extreme mood swings between emotional highs (mania) and lows (depression).</p>
+        </div>
+        <div class="card">
+          <div class="card-icon red">🧩</div>
+          <h3>Schizophrenia</h3>
+          <p>A serious disorder affecting how a person thinks, feels, and behaves; may include hallucinations or delusions.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon green">🍽️</div>
+          <h3>Eating Disorders</h3>
+          <p>Conditions like anorexia, bulimia, and binge-eating disorder involving unhealthy eating behaviors and body image.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon pink">💔</div>
+          <h3>PTSD</h3>
+          <p>Post-Traumatic Stress Disorder develops after experiencing or witnessing traumatic events, causing flashbacks and distress.</p>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="tab-panel" id="tab-myths">
+      <div class="card-grid">
+        <div class="card">
+          <h3 style="color:var(--red);margin-bottom:6px">✗ Myth</h3>
+          <p style="margin-bottom:8px">"Mental illness is a sign of weakness."</p>
+          <h3 style="color:var(--green);margin-bottom:6px">✓ Fact</h3>
+          <p>Mental illness is a medical condition, just like diabetes or heart disease. It has nothing to do with strength.</p>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--red);margin-bottom:6px">✗ Myth</h3>
+          <p style="margin-bottom:8px">"Talking about suicide plants the idea."</p>
+          <h3 style="color:var(--green);margin-bottom:6px">✓ Fact</h3>
+          <p>Asking about suicide openly does NOT increase risk. It can provide relief and open the door to getting help.</p>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--red);margin-bottom:6px">✗ Myth</h3>
+          <p style="margin-bottom:8px">"People who talk about suicide just want attention."</p>
+          <h3 style="color:var(--green);margin-bottom:6px">✓ Fact</h3>
+          <p>Any talk of suicide should be taken seriously. Most people who die by suicide gave warning signs beforehand.</p>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--red);margin-bottom:6px">✗ Myth</h3>
+          <p style="margin-bottom:8px">"You can't help someone who is suicidal."</p>
+          <h3 style="color:var(--green);margin-bottom:6px">✓ Fact</h3>
+          <p>Your presence, compassion, and listening matter enormously. Connecting someone to help can save a life.</p>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="tab-panel" id="tab-stats">
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon blue">🌍</div>
+          <h3>1 in 4 People</h3>
+          <p>Will be affected by mental health issues at some point in their life globally.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon red">📊</div>
+          <h3>700,000+ Per Year</h3>
+          <p>People die by suicide every year worldwide. It is the 4th leading cause of death among 15–29 year-olds.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon yellow">⏳</div>
+          <h3>11 Years Average</h3>
+          <p>Delay between symptom onset and treatment for mental health conditions.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon green">💚</div>
+          <h3>80% Treatable</h3>
+          <p>With proper care and support, about 80% of people with mental illness can significantly improve their quality of life.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="warning-section" id="warning">
+  <div class="container">
+    <div class="section-label">Awareness</div>
+    <div class="section-title">Warning Signs of Suicidal Crisis</div>
+    <p class="section-sub">Know the signs. Early recognition can save a life. If you notice these in yourself or others, seek help immediately.</p>
+    <ul class="warning-list">
+      <li>Talking about wanting to die or to kill oneself</li>
+      <li>Looking for ways to kill oneself (searching online, collecting pills)</li>
+      <li>Talking about being a burden to others</li>
+      <li>Increased substance use (alcohol, drugs)</li>
+      <li>Withdrawing from friends, family, and activities</li>
+      <li>Extreme mood swings or sudden calmness after depression</li>
+      <li>Giving away prized possessions</li>
+      <li>Expressing feelings of hopelessness or having no reason to live</li>
+      <li>Talking about being trapped or in unbearable pain</li>
+      <li>Saying goodbyes or acting as if settling affairs</li>
+      <li>Reckless or self-destructive behavior</li>
+      <li>Changes in sleep patterns — sleeping too much or too little</li>
+    </ul>
+  </div>
+</section>
+
+
+<section id="tools">
+  <div class="container">
+    <div class="section-label">Self-Help</div>
+    <div class="section-title">Coping Strategies That Work</div>
+    <p class="section-sub">Evidence-based techniques to manage stress, anxiety, and difficult emotions day to day.</p>
+    <div class="coping-grid">
+      <div class="coping-card">
+        <h3>Grounding (5-4-3-2-1)</h3>
+        <ul>
+          <li>5 things you can <b>see</b></li>
+          <li>4 things you can <b>touch</b></li>
+          <li>3 things you can <b>hear</b></li>
+          <li>2 things you can <b>smell</b></li>
+          <li>1 thing you can <b>taste</b></li>
+        </ul>
+      </div>
+      <div class="coping-card">
+        <h3>Mindfulness</h3>
+        <ul>
+          <li>Focus on the present moment</li>
+          <li>Observe thoughts without judgment</li>
+          <li>Body scan meditation</li>
+          <li>Mindful eating or walking</li>
+        </ul>
+      </div>
+      <div class="coping-card">
+        <h3>Physical Activity</h3>
+        <ul>
+          <li>30-min walk outdoors</li>
+          <li>Yoga or stretching</li>
+          <li>Dance to music you love</li>
+          <li>Even 10 mins helps mood</li>
+        </ul>
+      </div>
+      <div class="coping-card">
+        <h3>Journaling</h3>
+        <ul>
+          <li>Write 3 things you're grateful for</li>
+          <li>Express emotions freely</li>
+          <li>Identify triggers and patterns</li>
+          <li>Write a letter to yourself</li>
+        </ul>
+      </div>
+      <div class="coping-card">
+        <h3>Social Connection</h3>
+        <ul>
+          <li>Call a trusted friend or family</li>
+          <li>Join a support group</li>
+          <li>Volunteer in community</li>
+          <li>Share your feelings openly</li>
+        </ul>
+      </div>
+      <div class="coping-card">
+        <h3>Professional Help</h3>
+        <ul>
+          <li>Therapy (CBT, DBT, talk)</li>
+          <li>Psychiatry if needed</li>
+          <li>Online counseling platforms</li>
+          <li>Ask your GP for a referral</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="section-label">Interactive Tool</div>
+    <div class="section-title">Box Breathing Exercise</div>
+    <p class="section-sub">A simple yet powerful technique used by therapists to reduce stress and calm the nervous system.</p>
+    <div class="breathing-box">
+      <h3>4-4-4-4 Box Breathing</h3>
+      <p>Used by military, athletes, and therapists to regulate your nervous system and reduce anxiety.</p>
+      <div class="breath-circle" id="breathCircle">Ready</div>
+      <div id="breath-phase">Press Start to begin</div>
+      <div id="breath-count"></div>
+      <div class="breath-controls">
+        <button id="startBreath">Start</button>
+        <button id="stopBreath">Stop</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="mood-section">
+  <div class="container">
+    <div class="section-label">Check-In</div>
+    <div class="section-title">How Are You Feeling Today?</div>
+    <p class="section-sub">Take a moment to acknowledge your current emotional state. Awareness is the first step to well-being.</p>
+    <div class="mood-box">
+      <h3>Select your mood</h3>
+      <p>No judgment here — just honest self-reflection.</p>
+      <div class="mood-options" id="moodOptions">
+        <button class="mood-btn" data-mood="great" data-label="Great">😄<span>Great</span></button>
+        <button class="mood-btn" data-mood="good" data-label="Good">🙂<span>Good</span></button>
+        <button class="mood-btn" data-mood="okay" data-label="Okay">😐<span>Okay</span></button>
+        <button class="mood-btn" data-mood="sad" data-label="Sad">😔<span>Sad</span></button>
+        <button class="mood-btn" data-mood="anxious" data-label="Anxious">😰<span>Anxious</span></button>
+        <button class="mood-btn" data-mood="angry" data-label="Angry">😠<span>Angry</span></button>
+        <button class="mood-btn" data-mood="hopeless" data-label="Hopeless">😶<span>Hopeless</span></button>
+      </div>
+      <div id="mood-response"></div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <div class="section-label">Daily Habits</div>
+    <div class="section-title">Self-Care Checklist</div>
+    <p class="section-sub">Small steps, every day. Check off what you've done today to nurture your well-being.</p>
+    <div class="checklist" id="selfCareList">
+      <label class="check-item"><input type="checkbox" /> Drank enough water</label>
+      <label class="check-item"><input type="checkbox" /> Got 7–9 hours of sleep</label>
+      <label class="check-item"><input type="checkbox" /> Ate a balanced meal</label>
+      <label class="check-item"><input type="checkbox" /> Moved my body</label>
+      <label class="check-item"><input type="checkbox" /> Spent time outdoors</label>
+      <label class="check-item"><input type="checkbox" /> Connected with someone</label>
+      <label class="check-item"><input type="checkbox" /> Did something I enjoy</label>
+      <label class="check-item"><input type="checkbox" /> Practiced breathing or meditation</label>
+      <label class="check-item"><input type="checkbox" /> Limited social media use</label>
+      <label class="check-item"><input type="checkbox" /> Journaled or reflected</label>
+      <label class="check-item"><input type="checkbox" /> Took my medication (if needed)</label>
+      <label class="check-item"><input type="checkbox" /> Was kind to myself</label>
+    </div>
+    <div id="checklist-msg">You're doing amazing — keep it up! 💚</div>
+  </div>
+</section>
+
+
+<section id="resources" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="section-label">Resources</div>
+    <div class="section-title">Helpful Organizations &amp; Tools</div>
+    <p class="section-sub">Trusted platforms, apps, and organizations for mental health support worldwide.</p>
+    <table class="resources-table">
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>Type</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>988 Suicide &amp; Crisis Lifeline</strong><br /><span style="font-size:12px;color:var(--muted)">Call or text 988 (US)</span></td>
+          <td><span class="tag">Hotline</span></td>
+          <td>Immediate crisis support, suicide prevention</td>
+        </tr>
+        <tr>
+          <td><strong>Crisis Text Line</strong><br /><span style="font-size:12px;color:var(--muted)">Text HOME to 741741</span></td>
+          <td><span class="tag">Text</span></td>
+          <td>24/7 text-based crisis support</td>
+        </tr>
+        <tr>
+          <td><strong>NAMI (National Alliance on Mental Illness)</strong><br /><span style="font-size:12px;color:var(--muted)">nami.org</span></td>
+          <td><span class="tag blue">Org</span></td>
+          <td>Education, advocacy, support groups</td>
+        </tr>
+        <tr>
+          <td><strong>iCall (India)</strong><br /><span style="font-size:12px;color:var(--muted)">9152987821</span></td>
+          <td><span class="tag">Hotline</span></td>
+          <td>Counseling helpline for India</td>
+        </tr>
+        <tr>
+          <td><strong>BetterHelp</strong><br /><span style="font-size:12px;color:var(--muted)">betterhelp.com</span></td>
+          <td><span class="tag green">App</span></td>
+          <td>Online therapy with licensed counselors</td>
+        </tr>
+        <tr>
+          <td><strong>Headspace / Calm</strong><br /><span style="font-size:12px;color:var(--muted)">headspace.com / calm.com</span></td>
+          <td><span class="tag green">App</span></td>
+          <td>Meditation, sleep, mindfulness</td>
+        </tr>
+        <tr>
+          <td><strong>Psychology Today Therapist Finder</strong><br /><span style="font-size:12px;color:var(--muted)">psychologytoday.com</span></td>
+          <td><span class="tag blue">Org</span></td>
+          <td>Find a therapist near you</td>
+        </tr>
+        <tr>
+          <td><strong>Samaritans (UK/Ireland)</strong><br /><span style="font-size:12px;color:var(--muted)">116 123</span></td>
+          <td><span class="tag">Hotline</span></td>
+          <td>Emotional support, 24/7</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <div class="section-label">Supporting Others</div>
+    <div class="section-title">How to Help Someone in Crisis</div>
+    <p class="section-sub">You don't need to be a professional to make a difference. Here's what you can do.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon blue">👂</div>
+        <h3>Listen Without Judgment</h3>
+        <p>Give them your full attention. Don't minimize their feelings or offer quick fixes — just listen.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon green">💬</div>
+        <h3>Ask Directly</h3>
+        <p>It's okay to ask "Are you thinking about suicide?" Asking shows you care and opens the door.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon purple">🤝</div>
+        <h3>Stay With Them</h3>
+        <p>Don't leave them alone. Your presence provides comfort and reduces immediate risk.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon yellow">📞</div>
+        <h3>Connect to Help</h3>
+        <p>Help them call a crisis line, go to the ER, or contact a mental health professional together.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon red">🚫</div>
+        <h3>Remove Access</h3>
+        <p>If safe to do so, help remove access to lethal means such as medications, weapons, or sharp objects.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon pink">💙</div>
+        <h3>Follow Up</h3>
+        <p>Check in after the crisis. A simple message or call says "I care about you" and can prevent relapse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#understand">Understanding</a>
+      <a href="#tools">Coping Tools</a>
+      <a href="#resources">Resources</a>
+      <a href="#crisis">Crisis Help</a>
+    </div>
+    <p style="color:var(--muted);font-size:13px;max-width:520px;margin:0 auto">
+      This website is for educational and informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. If you are in crisis, please contact emergency services or a crisis hotline immediately.
+    </p>
+    <div class="made-with">Made with IBM Bob</div>
+  </div>
+</footer>
+
+
+<script>
+  window.wxOConfiguration = {
+    orchestrationID: "undefined",
+    hostURL: "https://au-syd.watson-orchestrate.cloud.ibm.com",
+    rootElementID: "root",
+    deploymentPlatform: "ibmcloud",
+    crn: "crn:v1:bluemix:public:watsonx-orchestrate:au-syd:a/eb578a83f42e48a0838c17d3245a6ced:af2daa1e-6b58-46e3-93b6-ce9a5c0d4d61::",
+    chatOptions: {
+        agentId: "0604e521-61d3-4ef7-a231-b175630c0adf", 
+    }
+  };
+  setTimeout(function () {
+    const script = document.createElement('script');
+    script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+    script.addEventListener('load', function () {
+        wxoLoader.init();
+    });
+    document.head.appendChild(script);
+  }, 0);                     
+</script>
+</body>
+</html>
